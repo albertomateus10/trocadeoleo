@@ -29,14 +29,9 @@
                 <div class="dashboard-layout">
                     <!-- Sidebar de Modelos Raiz -->
                     <aside class="sidebar sidebar-root">
-                        <div class="search-container" style="display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;">
-                            <div style="position: relative; flex: 1;">
-                                <i data-lucide="search" class="search-icon"></i>
-                                <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar modelo">
-                            </div>
-                            <button id="theme-toggle-btn" class="theme-toggle-btn" title="Alternar Tema" style="margin-top: 0; width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                                <i data-lucide="moon"></i>
-                            </button>
+                        <div class="search-container" style="margin-bottom: 0.75rem;">
+                            <i data-lucide="search" class="search-icon"></i>
+                            <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar modelo">
                         </div>
                         <h3 class="model-list-title"></h3>
                         <div class="model-list" id="oil-root-list-container">
@@ -84,10 +79,10 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Descrição do Componente</th>
-                                                    <th>Código (PN)</th>
-                                                    <th class="text-right">Preço Unit.</th>
-                                                    <th class="text-right">Qtd. Necessária</th>
+                                                    <th>Componente</th>
+                                                    <th>Código</th>
+                                                    <th class="text-right">Unitário</th>
+                                                    <th class="text-right">Qtd.</th>
                                                     <th class="text-right">Subtotal</th>
                                                 </tr>
                                             </thead>

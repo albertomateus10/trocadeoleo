@@ -9,37 +9,7 @@ const mainLoader = document.getElementById('main-loader');
 const mainContent = document.getElementById('main-content');
 
 
-//// Gerenciamento de Tema (Claro / Escuro)
-function initTheme() {
-    const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    if (!themeToggleBtn) return;
-    
-    // Obter tema salvo ou usar 'dark' como padrão
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme, themeToggleBtn);
-    
-    themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        updateThemeIcon(newTheme, themeToggleBtn);
-    });
-}
 
-function updateThemeIcon(theme, button) {
-    if (!button) return;
-    if (theme === 'light') {
-        button.innerHTML = '<i data-lucide="sun"></i>';
-    } else {
-        button.innerHTML = '<i data-lucide="moon"></i>';
-    }
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-}
 
 // Injeção da data atual formatada
 function initDate() {
@@ -57,10 +27,6 @@ function initDate() {
 // Inicialização da Aplicação
 document.addEventListener('DOMContentLoaded', () => {
     try {
-        // Inicializar o tema antes de exibir o conteúdo para evitar piscadas (flash)
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
         // Inicializar ícones do Lucide (apenas se a lib estiver disponível)
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -77,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.classList.remove('hidden');
             
             // Inicializar componentes
-            initTheme();
             initDate();
             initTrocaOleo();
             
