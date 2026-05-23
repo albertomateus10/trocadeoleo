@@ -149,13 +149,14 @@ function selectOilCar(carName) {
     const combustionContainer = document.getElementById('oil-combustion-container');
     const electricAlert = document.getElementById('oil-electric-alert');
     
-    // Ocultar a capa inicial
-    if (welcomeCover) welcomeCover.classList.add('hidden');
+    // Ocultar a capa inicial usando style.display para sobrepor qualquer inline style
+    if (welcomeCover) welcomeCover.style.display = 'none';
     
     // Caso especial: veículos elétricos (500e e e-SCUDO)
     const isElectric = carName.toLowerCase() === '500e' || carName.toLowerCase() === 'e-scudo';
     if (isElectric) {
-        combustionContainer.classList.add('hidden');
+        combustionContainer.style.display = 'none';
+        electricAlert.style.display = 'block';
         electricAlert.classList.remove('hidden');
         
         // Injetar dinamicamente o nome do modelo no texto de alerta
@@ -170,8 +171,9 @@ function selectOilCar(carName) {
         return;
     }
     
+    combustionContainer.style.display = 'block';
     combustionContainer.classList.remove('hidden');
-    electricAlert.classList.add('hidden');
+    electricAlert.style.display = 'none';
     
     const partsTableBody = document.getElementById('oil-parts-table-body');
     partsTableBody.innerHTML = '';
