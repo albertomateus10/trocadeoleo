@@ -122,15 +122,9 @@ function initTrocaOleo() {
         renderSidebarList(e.target.value);
     });
     
-    // Inicializar carregando o primeiro veículo da lista
+    // Inicializar carregando a lista, sem selecionar nenhum veículo
     if (carNames.length > 0) {
         renderSidebarList();
-        selectOilCar(carNames[0]);
-        // Ativar a primeira linha do botão
-        setTimeout(() => {
-            const firstBtn = listContainer.querySelector('.oil-model-btn');
-            if (firstBtn) firstBtn.classList.add('active');
-        }, 50);
     }
 }
 
@@ -151,8 +145,12 @@ function selectOilCar(carName) {
     // Atualizar título
     document.getElementById('oil-car-name').innerText = currentOilCar.modelo;
     
+    const welcomeCover = document.getElementById('oil-welcome-cover');
     const combustionContainer = document.getElementById('oil-combustion-container');
     const electricAlert = document.getElementById('oil-electric-alert');
+    
+    // Ocultar a capa inicial
+    if (welcomeCover) welcomeCover.classList.add('hidden');
     
     // Caso especial: veículos elétricos (500e e e-SCUDO)
     const isElectric = carName.toLowerCase() === '500e' || carName.toLowerCase() === 'e-scudo';

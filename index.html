@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisão Programada FIAT - Tabela Interativa</title>
+    <title>Troca de Óleo</title>
     <!-- CSS Customizado -->
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons para ícones modernos -->
@@ -31,9 +31,9 @@
                     <aside class="sidebar">
                         <div class="search-container">
                             <i data-lucide="search" class="search-icon"></i>
-                            <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar modelo (ex: Cronos, Toro)...">
+                            <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar por modelo">
                         </div>
-                        <h3 class="model-list-title">Modelos Disponíveis</h3>
+                        <h3 class="model-list-title"></h3>
                         <div class="model-list" id="oil-vehicle-list-container">
                             <!-- Os botões dos veículos serão injetados dinamicamente via JS -->
                         </div>
@@ -41,8 +41,15 @@
 
                     <!-- Área de Visualização do Veículo Selecionado -->
                     <div class="content-area">
-                        <!-- Bloco para Veículos a Combustão (Inicialmente Visível) -->
-                        <div id="oil-combustion-container">
+                        <!-- Tela de Boas-Vindas (Capa) -->
+                        <div id="oil-welcome-cover" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px; text-align: center; color: var(--text-muted); padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--card-border); box-shadow: 0 4px 20px var(--shadow-color);">
+                            <i data-lucide="car-front" style="width: 64px; height: 64px; color: var(--accent-red); margin-bottom: 1.5rem; opacity: 0.8;"></i>
+                            <h2 style="font-size: 1.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">Valores de Troca de Óleo</h2>
+                            <p style="font-size: 1.05rem; max-width: 450px; line-height: 1.6; font-family: 'Inter', sans-serif;">Selecione um modelo de veículo na lista ao lado para visualizar os valores de óleo e filtro e quantidade de óleo e tempo de mão de obra.</p>
+                        </div>
+
+                        <!-- Bloco para Veículos a Combustão (Inicialmente Oculto) -->
+                        <div id="oil-combustion-container" class="hidden">
                             <!-- Card com Informações Principais e Preço -->
                             <div class="premium-card">
                                 <div class="car-header">

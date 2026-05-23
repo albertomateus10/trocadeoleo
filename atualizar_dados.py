@@ -197,6 +197,18 @@ for sheet_name in sheet_names[1:]:
             
             desc = str(sheet.cell(row=r, column=2).value).strip()
             pn = str(sheet.cell(row=r, column=3).value).strip() if sheet.cell(row=r, column=3).value is not None else ""
+            
+            # Substituições de códigos de óleo
+            mapeamento_pn = {
+                "K68218951LA_F": "7092778",
+                "K68218921LA_F": "Of20007",
+                "7094487": "7092778",
+                "K68444160LA_F": "7092778",
+                "K68231015LA": "7094487"
+            }
+            if pn in mapeamento_pn:
+                pn = mapeamento_pn[pn]
+                
             preco_unit = sheet.cell(row=r, column=4).value
             
             if preco_unit is not None:
@@ -255,7 +267,7 @@ for sheet_name in sheet_names[1:]:
                 name_lower = item["nome"].lower()
                 if item["tipo"] == "peça" and any(x in name_lower for x in ["óleo", "oleo"]) and "motor" in name_lower and not any(x in name_lower for x in ["filtro", "filtrante"]):
                     item["nome"] = "5W30"
-                    item["pn"] = "K68231015LA"
+                    item["pn"] = "7094487"
                     item["preco_unitario"] = 91.54
                     for r_name in list(item["trocas"].keys()):
                         try:
@@ -276,7 +288,7 @@ for sheet_name in sheet_names[1:]:
                 name_lower = item["nome"].lower()
                 if item["tipo"] == "peça" and any(x in name_lower for x in ["óleo", "oleo"]) and "motor" in name_lower and not any(x in name_lower for x in ["filtro", "filtrante"]):
                     item["nome"] = "5W30"
-                    item["pn"] = "K68231015LA"
+                    item["pn"] = "7094487"
                     item["preco_unitario"] = 91.54
                     for r_name in list(item["trocas"].keys()):
                         try:

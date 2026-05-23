@@ -266,7 +266,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -646,7 +646,7 @@ window.fiatData = {
         },
         {
           "nome": "Óleo do motor - MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -991,7 +991,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -1371,7 +1371,7 @@ window.fiatData = {
         },
         {
           "nome": "Óleo do motor - MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -1727,7 +1727,7 @@ window.fiatData = {
         },
         {
           "nome": "Óleo do motor - MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -2071,7 +2071,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -2358,7 +2358,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -2620,7 +2620,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -2863,7 +2863,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -3130,7 +3130,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -3374,7 +3374,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -3639,7 +3639,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -3904,7 +3904,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -4226,7 +4226,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -4545,7 +4545,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -4891,7 +4891,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -5292,7 +5292,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -5637,7 +5637,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -5982,7 +5982,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -6244,7 +6244,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -6574,7 +6574,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -6999,7 +6999,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -7344,7 +7344,7 @@ window.fiatData = {
         },
         {
           "nome": "Mopar Maxpro Syntetic 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -7641,7 +7641,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -7964,7 +7964,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -8282,7 +8282,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -8625,7 +8625,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -8871,7 +8871,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -9174,7 +9174,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -9499,7 +9499,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -9900,7 +9900,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -10253,7 +10253,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W20 (SP/GF-6A)",
-          "pn": "K68218951LA_F",
+          "pn": "7092778",
           "preco_unitario": 81.26,
           "tipo": "peça",
           "trocas": {
@@ -10498,7 +10498,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -10764,7 +10764,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -11016,7 +11016,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO 5W30 (SN/GF-5)",
-          "pn": "K68218921LA_F",
+          "pn": "Of20007",
           "preco_unitario": 75.7,
           "tipo": "peça",
           "trocas": {
@@ -11357,7 +11357,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -11741,7 +11741,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO SYNTHETIC 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -12177,7 +12177,7 @@ window.fiatData = {
         },
         {
           "nome": "Óleo do motor - Mopar Maxpro Syntetic 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -12613,7 +12613,7 @@ window.fiatData = {
         },
         {
           "nome": "Óleo do motor - Mopar Maxpro Syntetic 0W30",
-          "pn": "K68444160LA_F",
+          "pn": "7092778",
           "preco_unitario": 87.82,
           "tipo": "peça",
           "trocas": {
@@ -14094,7 +14094,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR SAE 0W30 ACEA C1 C2  1L",
-          "pn": "7094487",
+          "pn": "7092778",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
@@ -14363,7 +14363,7 @@ window.fiatData = {
         },
         {
           "nome": "5W30",
-          "pn": "K68231015LA",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
@@ -14680,7 +14680,7 @@ window.fiatData = {
         },
         {
           "nome": "5W30",
-          "pn": "K68231015LA",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
@@ -15157,7 +15157,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR SAE 0W30 ACEA C1/C2 (1L)",
-          "pn": "7094487",
+          "pn": "7092778",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
@@ -16155,7 +16155,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR INEO HTC 5W30 (1L)",
-          "pn": "7094487",
+          "pn": "7092778",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
@@ -16492,7 +16492,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR INEO HTC 5W30 (1L)",
-          "pn": "7094487",
+          "pn": "7092778",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
