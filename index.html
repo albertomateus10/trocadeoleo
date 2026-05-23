@@ -27,13 +27,26 @@
             <!-- ABA TROCA DE ÓLEO -->
             <section id="tab-troca-oleo" class="tab-content fade-in">
                 <div class="dashboard-layout">
-                    <!-- Sidebar de Seleção de Carros -->
-                    <aside class="sidebar">
-                        <div class="search-container">
-                            <i data-lucide="search" class="search-icon"></i>
-                            <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar por modelo">
+                    <!-- Sidebar de Modelos Raiz -->
+                    <aside class="sidebar sidebar-root">
+                        <div class="search-container" style="display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem;">
+                            <div style="position: relative; flex: 1;">
+                                <i data-lucide="search" class="search-icon"></i>
+                                <input type="text" id="oil-model-search" class="search-input" placeholder="Buscar modelo">
+                            </div>
+                            <button id="theme-toggle-btn" class="theme-toggle-btn" title="Alternar Tema" style="margin-top: 0; width: 38px; height: 38px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                                <i data-lucide="moon"></i>
+                            </button>
                         </div>
                         <h3 class="model-list-title"></h3>
+                        <div class="model-list" id="oil-root-list-container">
+                            <!-- Os botões dos modelos raiz (ex: TORO, CRONOS) serão injetados via JS -->
+                        </div>
+                    </aside>
+
+                    <!-- Sidebar de Seleção de Carros -->
+                    <aside class="sidebar">
+                        <h3 class="model-list-title" id="oil-sub-list-title">Versões</h3>
                         <div class="model-list" id="oil-vehicle-list-container">
                             <!-- Os botões dos veículos serão injetados dinamicamente via JS -->
                         </div>
@@ -44,7 +57,7 @@
                         <!-- Tela de Boas-Vindas (Capa) -->
                         <div id="oil-welcome-cover" class="welcome-cover">
                             <h2>Valores de Troca de Óleo</h2>
-                            <p>Selecione um modelo de veículo na lista ao lado para visualizar os valores de óleo e filtro e quantidade de óleo e tempo de mão de obra.</p>
+                            <p>Selecione uma versão na coluna central para visualizar os valores de óleo e filtro, quantidade de óleo e tempo de mão de obra.</p>
                         </div>
 
                         <!-- Bloco para Veículos a Combustão (Inicialmente Oculto) -->

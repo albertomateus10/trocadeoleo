@@ -9254,8 +9254,8 @@ window.fiatData = {
         }
       ]
     },
-    "FASTBACK ABARTH 1.3T": {
-      "modelo": "FASTBACK ABARTH 1.3T",
+    "FASTBACK Limited/ABARTH 1.3T": {
+      "modelo": "FASTBACK Limited/ABARTH 1.3T",
       "revisoes": [
         "1a",
         "2a",

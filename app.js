@@ -9,9 +9,58 @@ const mainLoader = document.getElementById('main-loader');
 const mainContent = document.getElementById('main-content');
 
 
+//// Gerenciamento de Tema (Claro / Escuro)
+function initTheme() {
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    if (!themeToggleBtn) return;
+    
+    // Obter tema salvo ou usar 'dark' como padrão
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme, themeToggleBtn);
+    
+    themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme, themeToggleBtn);
+    });
+}
+
+function updateThemeIcon(theme, button) {
+    if (!button) return;
+    if (theme === 'light') {
+        button.innerHTML = '<i data-lucide="sun"></i>';
+    } else {
+        button.innerHTML = '<i data-lucide="moon"></i>';
+    }
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+}
+
+// Injeção da data atual formatada
+function initDate() {
+    const dateDisplay = document.getElementById('current-date-display');
+    if (!dateDisplay) return;
+    
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const today = new Date();
+    let dateStr = today.toLocaleDateString('pt-BR', options);
+    // Capitalizar a primeira letra
+    dateStr = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+    dateDisplay.innerText = dateStr;
+}
+
 // Inicialização da Aplicação
 document.addEventListener('DOMContentLoaded', () => {
     try {
+        // Inicializar o tema antes de exibir o conteúdo para evitar piscadas (flash)
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
         // Inicializar ícones do Lucide (apenas se a lib estiver disponível)
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
@@ -28,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mainContent.classList.remove('hidden');
             
             // Inicializar componentes
+            initTheme();
+            initDate();
             initTrocaOleo();
             
             // Re-renderizar ícones
@@ -76,34 +127,156 @@ function formatCurrency(val) {
 // ==========================================
 // 4. TROCA DE ÓLEO (ABA 4)
 // ==========================================
+// Função auxiliar para determinar o modelo raiz a partir do nome completo do veículo
+function getRootModel(name) {
+    const nameUpper = name.toUpperCase();
+    if (nameUpper.includes("STRADA")) return "STRADA";
+    if (nameUpper.includes("SIENA")) return "GRAND SIENA";
+    if (nameUpper.includes("PALIO")) return "PALIO";
+    if (nameUpper.includes("FASTBACK")) return "FASTBACK";
+    if (nameUpper.includes("DUCATO")) return "DUCATO";
+    if (nameUpper.includes("SCUDO")) return "SCUDO";
+    if (nameUpper.includes("DOBLO")) return "DOBLO";
+    if (nameUpper.includes("FIORINO")) return "FIORINO";
+    if (nameUpper.includes("CRONOS")) return "CRONOS";
+    if (nameUpper.includes("ARGO")) return "ARGO";
+    if (nameUpper.includes("MOBI")) return "MOBI";
+    if (nameUpper.includes("PULSE")) return "PULSE";
+    if (nameUpper.includes("TITANO")) return "TITANO";
+    if (nameUpper.includes("TORO")) return "TORO";
+    if (nameUpper.includes("UNO")) return "UNO";
+    
+    // Padrão: primeira palavra em maiúsculo
+    return name.split(" ")[0].toUpperCase();
+}
+
+// Função auxiliar para decompor o nome da versão em título principal e subtítulo
+function parseVersionName(fullName) {
+    const root = getRootModel(fullName);
+    let rest = fullName;
+    
+    // Remover o nome do modelo raiz no início
+    if (fullName.toUpperCase().startsWith(root)) {
+        rest = fullName.substring(root.length).trim();
+    } else if (fullName.toUpperCase().startsWith("NOVA " + root)) {
+        rest = fullName.substring(("NOVA " + root).length).trim();
+    } else if (fullName.toUpperCase().startsWith("NOVO " + root)) {
+        rest = fullName.substring(("NOVO " + root).length).trim();
+    } else if (fullName.toUpperCase().startsWith("PALIO WEEKEND")) {
+        rest = fullName.substring("PALIO WEEKEND".length).trim();
+    } else if (fullName.toUpperCase().startsWith("GRAND SIENA")) {
+        rest = fullName.substring("GRAND SIENA".length).trim();
+    }
+    
+    let title = rest;
+    let subtitle = "";
+    
+    // Tenta encontrar "MY", "ATÉ", ou parênteses "("
+    const myIndex = rest.toUpperCase().indexOf("MY");
+    const ateIndex = rest.toUpperCase().indexOf("ATÉ");
+    const parenIndex = rest.indexOf("(");
+    
+    let splitIndex = -1;
+    if (myIndex !== -1) splitIndex = myIndex;
+    if (ateIndex !== -1 && (splitIndex === -1 || ateIndex < splitIndex)) splitIndex = ateIndex;
+    if (parenIndex !== -1 && (splitIndex === -1 || parenIndex < splitIndex)) splitIndex = parenIndex;
+    
+    if (splitIndex !== -1) {
+        title = rest.substring(0, splitIndex).trim();
+        subtitle = rest.substring(splitIndex).trim();
+        
+        // Limpar parênteses se necessário
+        if (subtitle.startsWith("(") && subtitle.endsWith(")")) {
+            subtitle = subtitle.substring(1, subtitle.length - 1).trim();
+        }
+    }
+    
+    // Se o título ficou vazio, usa o nome completo
+    if (!title) {
+        title = fullName;
+    }
+    
+    return { title, subtitle };
+}
+
 let currentOilCar = null;
+let selectedRootModel = null;
 
 function initTrocaOleo() {
     const searchInput = document.getElementById('oil-model-search');
+    const rootListContainer = document.getElementById('oil-root-list-container');
     const listContainer = document.getElementById('oil-vehicle-list-container');
     
-    // Obter todos os nomes de veículos (excluindo os elétricos) e ordenar alfabeticamente
+    // Obter todos os nomes de veículos (excluindo os elétricos)
     const carNames = Object.keys(fiatData.modelos)
         .filter(name => name.toLowerCase() !== '500e' && name.toLowerCase() !== 'e-scudo')
         .sort();
+        
+    // Agrupar veículos por modelo raiz
+    const rootGroups = {};
+    carNames.forEach((name) => {
+        const root = getRootModel(name);
+        if (!rootGroups[root]) {
+            rootGroups[root] = [];
+        }
+        rootGroups[root].push(name);
+    });
     
-    // Renderizar botões da sidebar do óleo
-    function renderSidebarList(filterText = '') {
-        listContainer.innerHTML = '';
-        const searchFiltered = carNames.filter(name => 
-            name.toLowerCase().includes(filterText.toLowerCase())
+    // Obter lista ordenada de modelos raiz
+    const rootModelsList = Object.keys(rootGroups).sort();
+    
+    // Função para renderizar a coluna de Modelos Raiz
+    function renderRootList(filterText = '') {
+        rootListContainer.innerHTML = '';
+        const filteredRoots = rootModelsList.filter(root => 
+            root.toLowerCase().includes(filterText.toLowerCase())
         );
         
-        searchFiltered.forEach((name) => {
+        filteredRoots.forEach((root) => {
+            const btn = document.createElement('button');
+            btn.className = 'root-model-btn';
+            if (selectedRootModel === root) {
+                btn.classList.add('active');
+            }
+            btn.innerHTML = `<span>${root}</span>`;
+            
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.root-model-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedRootModel = root;
+                // Ao mudar o modelo raiz, atualiza a coluna central
+                renderVersionList();
+            });
+            
+            rootListContainer.appendChild(btn);
+        });
+    }
+    
+    // Função para renderizar a coluna central de Versões
+    function renderVersionList() {
+        listContainer.innerHTML = '';
+        
+        if (!selectedRootModel) return;
+        
+        const versions = rootGroups[selectedRootModel] || [];
+        
+        versions.forEach((name) => {
             const btn = document.createElement('button');
             btn.className = 'model-item-btn oil-model-btn';
             if (currentOilCar && currentOilCar.modelo === name) {
                 btn.classList.add('active');
             }
+            
+            const parsed = parseVersionName(name);
+            const subtitleHtml = parsed.subtitle ? `<span class="version-subtitle">${parsed.subtitle}</span>` : '';
             btn.innerHTML = `
-                <span>${name}</span>
+                <div class="version-info">
+                    <span class="version-title">${parsed.title}</span>
+                    ${subtitleHtml}
+                </div>
                 <i data-lucide="chevron-right" class="chevron"></i>
             `;
+            
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.oil-model-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -117,16 +290,19 @@ function initTrocaOleo() {
         }
     }
     
-    // Adicionar listener de busca
+    // Listener do campo de busca de modelos raiz
     searchInput.addEventListener('input', (e) => {
-        renderSidebarList(e.target.value);
+        renderRootList(e.target.value);
     });
     
-    // Inicializar carregando a lista, sem selecionar nenhum veículo
-    if (carNames.length > 0) {
-        renderSidebarList();
+    // Inicialização: seleciona "TORO" se disponível, ou o primeiro modelo da lista
+    if (rootModelsList.length > 0) {
+        selectedRootModel = rootModelsList.includes("TORO") ? "TORO" : rootModelsList[0];
+        renderRootList();
+        renderVersionList();
     }
 }
+
 
 // Selecionar um veículo na aba de Troca de Óleo
 function selectOilCar(carName) {
