@@ -130,155 +130,160 @@ function initTrocaOleo() {
 
 // Selecionar um veículo na aba de Troca de Óleo
 function selectOilCar(carName) {
-    currentOilCar = fiatData.modelos[carName];
-    
-    // Definir horas padrão para troca de óleo do veículo
-    let defaultHours = 0.15;
-    const nameLower = carName.toLowerCase();
-    if (nameLower.includes('titano') || 
-        nameLower.includes('scudo') || 
-        nameLower.includes('toro') || 
-        nameLower.includes('ducato')) {
-        defaultHours = 0.30;
-    }
-    
-    // Atualizar título
-    document.getElementById('oil-car-name').innerText = currentOilCar.modelo;
-    
-    const welcomeCover = document.getElementById('oil-welcome-cover');
-    const combustionContainer = document.getElementById('oil-combustion-container');
-    const electricAlert = document.getElementById('oil-electric-alert');
-    
-    // Ocultar a capa inicial usando style.display para sobrepor qualquer inline style
-    if (welcomeCover) welcomeCover.style.display = 'none';
-    
-    // Caso especial: veículos elétricos (500e e e-SCUDO)
-    const isElectric = carName.toLowerCase() === '500e' || carName.toLowerCase() === 'e-scudo';
-    if (isElectric) {
-        combustionContainer.style.display = 'none';
-        electricAlert.style.display = 'block';
-        electricAlert.classList.remove('hidden');
+    try {
+        currentOilCar = fiatData.modelos[carName];
         
-        // Injetar dinamicamente o nome do modelo no texto de alerta
-        const pElem = electricAlert.querySelector('p');
-        if (pElem) {
-            pElem.innerHTML = `
-                O <strong>${currentOilCar.modelo}</strong> utiliza propulsão 100% elétrica. Por não possuir motor a combustão interna, ele <strong>não necessita de óleo lubrificante de motor</strong> nem filtro de óleo, resultando em um custo de <strong>R$ 0,00</strong> para este serviço.
+        // Definir horas padrão para troca de óleo do veículo
+        let defaultHours = 0.15;
+        const nameLower = carName.toLowerCase();
+        if (nameLower.includes('titano') || 
+            nameLower.includes('scudo') || 
+            nameLower.includes('toro') || 
+            nameLower.includes('ducato')) {
+            defaultHours = 0.30;
+        }
+        
+        // Atualizar título
+        document.getElementById('oil-car-name').innerText = currentOilCar.modelo;
+        
+        const welcomeCover = document.getElementById('oil-welcome-cover');
+        const combustionContainer = document.getElementById('oil-combustion-container');
+        const electricAlert = document.getElementById('oil-electric-alert');
+        
+        // Ocultar a capa inicial usando style.display para sobrepor qualquer inline style
+        if (welcomeCover) welcomeCover.style.display = 'none';
+        
+        // Caso especial: veículos elétricos (500e e e-SCUDO)
+        const isElectric = carName.toLowerCase() === '500e' || carName.toLowerCase() === 'e-scudo';
+        if (isElectric) {
+            combustionContainer.style.display = 'none';
+            electricAlert.style.display = 'block';
+            electricAlert.classList.remove('hidden');
+            
+            // Injetar dinamicamente o nome do modelo no texto de alerta
+            const pElem = electricAlert.querySelector('p');
+            if (pElem) {
+                pElem.innerHTML = `
+                    O <strong>${currentOilCar.modelo}</strong> utiliza propulsão 100% elétrica. Por não possuir motor a combustão interna, ele <strong>não necessita de óleo lubrificante de motor</strong> nem filtro de óleo, resultando em um custo de <strong>R$ 0,00</strong> para este serviço.
+                `;
+            }
+            
+            document.getElementById('oil-total-price').innerText = 'R$ 0,00';
+            return;
+        }
+        
+        combustionContainer.style.display = 'block';
+        combustionContainer.classList.remove('hidden');
+        electricAlert.style.display = 'none';
+        
+        const partsTableBody = document.getElementById('oil-parts-table-body');
+        partsTableBody.innerHTML = '';
+        
+        // Identificar itens da primeira revisão (índice 0)
+        const firstRevName = currentOilCar.revisoes[0];
+        
+        let subtotalPecas = 0;
+        let moHoras = 0;
+        let moPrecoHora = 0;
+        let moSubtotal = 0;
+        let indexItem = 0;
+        
+        // Listar peças de troca
+        currentOilCar.itens.forEach(item => {
+            const qty = item.trocas[firstRevName];
+            const custo = item.custos[firstRevName];
+            
+            // Se for serviço (mão de obra) na 1a revisão
+            if (item.tipo === 'serviço' && qty !== undefined && qty > 0) {
+                moHoras = defaultHours; // Sempre calcular a mão de obra com as horas padrão definidas para o veículo
+                moPrecoHora = parseFloat(item.preco_unitario) || 0;
+                moSubtotal = moHoras * moPrecoHora;
+            }
+            
+            // Identificar óleo ou filtro (heurística de busca)
+            const nameLower = item.nome.toLowerCase();
+            
+            const isFiltroOleo = item.tipo === 'peça' && 
+                (nameLower.includes('filtro de óleo') || 
+                 nameLower.includes('filtro óleo') || 
+                 nameLower.includes('filtro de oleo') || 
+                 nameLower.includes('filtro oleo') || 
+                 nameLower.includes('filtrante do filtro óleo') || 
+                 nameLower.includes('filtrante do óleo') || 
+                 nameLower.includes('filtrante de óleo') ||
+                 nameLower.includes('filtrante de oleo') ||
+                 nameLower.includes('filtrante do filtro oleo') ||
+                 nameLower.includes('filtrante do oleo'));
+                 
+            const isOleoMotor = item.tipo === 'peça' && 
+                (nameLower.includes('mopar maxpro') || 
+                 nameLower.includes('oleo motor') || 
+                 nameLower.includes('óleo motor') || 
+                 nameLower.includes('selenia') || 
+                 nameLower.includes('ineo') || 
+                 nameLower.includes('0w20') || 
+                 nameLower.includes('5w30') || 
+                 nameLower.includes('0w30')) && 
+                !(nameLower.includes('cambio') || 
+                  nameLower.includes('câmbio') || 
+                  nameLower.includes('diferencial') || 
+                  nameLower.includes('freio') || 
+                  nameLower.includes('caixa') || 
+                  nameLower.includes('transferência') || 
+                  nameLower.includes('direção'));
+                  
+            if (isFiltroOleo || isOleoMotor) {
+                // Pegar as quantidades na 1ª revisão
+                const itemQty = (qty !== undefined && qty > 0) ? qty : 1;
+                const precoUnit = parseFloat(item.preco_unitario) || 0;
+                const totalItem = (custo !== undefined && qty !== undefined && qty > 0) ? parseFloat(custo) : (itemQty * precoUnit);
+                
+                subtotalPecas += totalItem;
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="item-name-cell" data-label="Componente">${item.nome}</td>
+                    <td data-label="Código (PN)"><span class="item-pn">${item.pn}</span></td>
+                    <td class="text-right" data-label="Preço Unit.">${formatCurrency(precoUnit)}</td>
+                    <td class="text-right td-highlight" data-label="Qtd.">${itemQty}</td>
+                    <td class="text-right td-highlight" data-label="Subtotal">${formatCurrency(totalItem)}</td>
+                `;
+                partsTableBody.appendChild(tr);
+                indexItem++;
+            }
+        });
+        
+        if (indexItem === 0) {
+            partsTableBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                        Nenhum componente de óleo ou filtro identificado para este modelo.
+                    </td>
+                </tr>
             `;
         }
         
-        document.getElementById('oil-total-price').innerText = 'R$ 0,00';
-        return;
-    }
-    
-    combustionContainer.style.display = 'block';
-    combustionContainer.classList.remove('hidden');
-    electricAlert.style.display = 'none';
-    
-    const partsTableBody = document.getElementById('oil-parts-table-body');
-    partsTableBody.innerHTML = '';
-    
-    // Identificar itens da primeira revisão (índice 0)
-    const firstRevName = currentOilCar.revisoes[0];
-    
-    let subtotalPecas = 0;
-    let moHoras = 0;
-    let moPrecoHora = 0;
-    let moSubtotal = 0;
-    let indexItem = 0;
-    
-    // Listar peças de troca
-    currentOilCar.itens.forEach(item => {
-        const qty = item.trocas[firstRevName];
-        const custo = item.custos[firstRevName];
-        
-        // Se for serviço (mão de obra) na 1a revisão
-        if (item.tipo === 'serviço' && qty !== undefined && qty > 0) {
-            moHoras = defaultHours; // Sempre calcular a mão de obra com as horas padrão definidas para o veículo
-            moPrecoHora = parseFloat(item.preco_unitario) || 0;
+        // Se a mão de obra da 1ª revisão for zero ou não encontrada
+        if (moSubtotal === 0) {
+            moHoras = defaultHours; // Sempre as horas padrão do veículo
+            moPrecoHora = 349.0; 
             moSubtotal = moHoras * moPrecoHora;
         }
         
-        // Identificar óleo ou filtro (heurística de busca)
-        const nameLower = item.nome.toLowerCase();
+        const custoTotalTroca = subtotalPecas + moSubtotal;
         
-        const isFiltroOleo = item.tipo === 'peça' && 
-            (nameLower.includes('filtro de óleo') || 
-             nameLower.includes('filtro óleo') || 
-             nameLower.includes('filtro de oleo') || 
-             nameLower.includes('filtro oleo') || 
-             nameLower.includes('filtrante do filtro óleo') || 
-             nameLower.includes('filtrante do óleo') || 
-             nameLower.includes('filtrante de óleo') ||
-             nameLower.includes('filtrante de oleo') ||
-             nameLower.includes('filtrante do filtro oleo') ||
-             nameLower.includes('filtrante do oleo'));
-             
-        const isOleoMotor = item.tipo === 'peça' && 
-            (nameLower.includes('mopar maxpro') || 
-             nameLower.includes('oleo motor') || 
-             nameLower.includes('óleo motor') || 
-             nameLower.includes('selenia') || 
-             nameLower.includes('ineo') || 
-             nameLower.includes('0w20') || 
-             nameLower.includes('5w30') || 
-             nameLower.includes('0w30')) && 
-            !(nameLower.includes('cambio') || 
-              nameLower.includes('câmbio') || 
-              nameLower.includes('diferencial') || 
-              nameLower.includes('freio') || 
-              nameLower.includes('caixa') || 
-              nameLower.includes('transferência') || 
-              nameLower.includes('direção'));
-              
-        if (isFiltroOleo || isOleoMotor) {
-            // Pegar as quantidades na 1ª revisão
-            const itemQty = (qty !== undefined && qty > 0) ? qty : 1;
-            const precoUnit = parseFloat(item.preco_unitario) || 0;
-            const totalItem = (custo !== undefined && qty !== undefined && qty > 0) ? parseFloat(custo) : (itemQty * precoUnit);
-            
-            subtotalPecas += totalItem;
-            
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td class="item-name-cell">${item.nome}</td>
-                <td><span class="item-pn">${item.pn}</span></td>
-                <td class="text-right">${formatCurrency(precoUnit)}</td>
-                <td class="text-right td-highlight">${itemQty}</td>
-                <td class="text-right td-highlight">${formatCurrency(totalItem)}</td>
-            `;
-            partsTableBody.appendChild(tr);
-            indexItem++;
-        }
-    });
-    
-    if (indexItem === 0) {
-        partsTableBody.innerHTML = `
-            <tr>
-                <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 2rem;">
-                    Nenhum componente de óleo ou filtro identificado para este modelo.
-                </td>
-            </tr>
-        `;
+        // Atualizar interface de mão de obra
+        document.getElementById('oil-mo-hours').innerText = `${moHoras.toFixed(2)}h`;
+        document.getElementById('oil-mo-rate').innerText = formatCurrency(moPrecoHora);
+        document.getElementById('oil-mo-subtotal').innerText = formatCurrency(moSubtotal);
+        
+        // Atualizar resumo e display principal
+        document.getElementById('oil-sum-parts-cost').innerText = formatCurrency(subtotalPecas);
+        document.getElementById('oil-sum-mo-cost').innerText = formatCurrency(moSubtotal);
+        document.getElementById('oil-sum-total-cost').innerText = formatCurrency(custoTotalTroca);
+        document.getElementById('oil-total-price').innerText = formatCurrency(custoTotalTroca);
+    } catch (err) {
+        console.error("Erro ao selecionar o veículo:", err);
+        alert("Erro ao selecionar o veículo: " + err.message);
     }
-    
-    // Se a mão de obra da 1ª revisão for zero ou não encontrada
-    if (moSubtotal === 0) {
-        moHoras = defaultHours; // Sempre as horas padrão do veículo
-        moPrecoHora = 349.0; 
-        moSubtotal = moHoras * moPrecoHora;
-    }
-    
-    const custoTotalTroca = subtotalPecas + moSubtotal;
-    
-    // Atualizar interface de mão de obra
-    document.getElementById('oil-mo-hours').innerText = `${moHoras.toFixed(2)}h`;
-    document.getElementById('oil-mo-rate').innerText = formatCurrency(moPrecoHora);
-    document.getElementById('oil-mo-subtotal').innerText = formatCurrency(moSubtotal);
-    
-    // Atualizar resumo e display principal
-    document.getElementById('oil-sum-parts-cost').innerText = formatCurrency(subtotalPecas);
-    document.getElementById('oil-sum-mo-cost').innerText = formatCurrency(moSubtotal);
-    document.getElementById('oil-sum-total-cost').innerText = formatCurrency(custoTotalTroca);
-    document.getElementById('oil-total-price').innerText = formatCurrency(custoTotalTroca);
 }

@@ -42,10 +42,10 @@
                     <!-- Área de Visualização do Veículo Selecionado -->
                     <div class="content-area">
                         <!-- Tela de Boas-Vindas (Capa) -->
-                        <div id="oil-welcome-cover" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 400px; text-align: center; color: var(--text-muted); padding: 2rem; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--card-border); box-shadow: 0 4px 20px var(--shadow-color);">
-                            <i data-lucide="car-front" style="width: 64px; height: 64px; color: var(--accent-red); margin-bottom: 1.5rem; opacity: 0.8;"></i>
-                            <h2 style="font-size: 1.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; font-family: 'Outfit', sans-serif;">Valores de Troca de Óleo</h2>
-                            <p style="font-size: 1.05rem; max-width: 450px; line-height: 1.6; font-family: 'Inter', sans-serif;">Selecione um modelo de veículo na lista ao lado para visualizar os valores de óleo e filtro e quantidade de óleo e tempo de mão de obra.</p>
+                        <div id="oil-welcome-cover" class="welcome-cover">
+                            <i data-lucide="car-front"></i>
+                            <h2>Valores de Troca de Óleo</h2>
+                            <p>Selecione um modelo de veículo na lista ao lado para visualizar os valores de óleo e filtro e quantidade de óleo e tempo de mão de obra.</p>
                         </div>
 
                         <!-- Bloco para Veículos a Combustão (Inicialmente Oculto) -->
@@ -68,9 +68,6 @@
                             <div class="details-grid">
                                 <!-- Tabela de Componentes -->
                                 <div class="section-card">
-                                    <div class="section-header">
-                                        <h3 class="section-title"><i data-lucide="droplet" style="color: var(--accent-red);"></i> Componentes do Serviço</h3>
-                                    </div>
                                     <div class="table-responsive">
                                         <table>
                                             <thead>
@@ -91,10 +88,6 @@
 
                                 <!-- Resumo Financeiro da Troca de Óleo -->
                                 <div class="section-card">
-                                    <div class="section-header">
-                                        <h3 class="section-title"><i data-lucide="info"></i> Detalhamento de Custos</h3>
-                                    </div>
-                                    
                                     <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;">
                                         <h4 style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Mão de Obra de Troca</h4>
                                         <div class="table-responsive" style="margin-bottom: 1rem;">
@@ -109,10 +102,10 @@
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="item-name-cell">Mão de Obra Troca de Óleo</td>
-                                                        <td class="text-right td-highlight" id="oil-mo-hours">0.0h</td>
-                                                        <td class="text-right" id="oil-mo-rate">R$ 0,00</td>
-                                                        <td class="text-right td-highlight" id="oil-mo-subtotal">R$ 0,00</td>
+                                                        <td class="item-name-cell" data-label="Serviço">Mão de Obra Troca de Óleo</td>
+                                                        <td class="text-right td-highlight" id="oil-mo-hours" data-label="Horas">0.0h</td>
+                                                        <td class="text-right" id="oil-mo-rate" data-label="Preço/h">R$ 0,00</td>
+                                                        <td class="text-right td-highlight" id="oil-mo-subtotal" data-label="Subtotal">R$ 0,00</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -139,7 +132,7 @@
                         </div>
 
                         <!-- Bloco para Veículo Elétrico (Fiat 500e - Inicialmente Oculto) -->
-                        <div id="oil-electric-alert" class="premium-card" style="display: none; text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%); border-color: rgba(59, 130, 246, 0.3); margin-top: 2rem;">
+                        <div id="oil-electric-alert" class="premium-card electric-alert" style="display: none;">
                             <i data-lucide="zap" style="width: 48px; height: 48px; color: var(--info-color); margin-bottom: 1.5rem; stroke-width: 1.5; display: inline-block;"></i>
                             <h3 style="font-size: 1.6rem; margin-bottom: 0.75rem; color: var(--text-primary);">Veículo 100% Elétrico</h3>
                             <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 1.05rem;">
