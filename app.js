@@ -386,7 +386,7 @@ function selectOilCar(carName) {
                     <td class="item-name-cell" data-label="Componente">${item.nome}</td>
                     <td data-label="Código (PN)"><span class="item-pn">${item.pn}</span></td>
                     <td class="text-right" data-label="Preço Unit.">${formatCurrency(precoUnit)}</td>
-                    <td class="text-right td-highlight" data-label="Qtd.">${itemQty}</td>
+                    <td class="text-right td-highlight" data-label="QTD">${itemQty}</td>
                     <td class="text-right td-highlight" data-label="Subtotal">${formatCurrency(totalItem)}</td>
                 `;
                 partsTableBody.appendChild(tr);
