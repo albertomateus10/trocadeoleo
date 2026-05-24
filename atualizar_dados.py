@@ -16,14 +16,15 @@ excel_path = os.path.join(base_dir, excel_name)
 json_path = os.path.join(base_dir, "fiat_revisoes_data.json")
 js_path = os.path.join(base_dir, "fiat_data.js")
 
-# Mapeamento de nomes para modelos Titano e Scudo conforme solicitação do usuário
+# Mapeamento de nomes para modelos conforme solicitação do usuário
 mapeamento_nomes = {
     "TITANO 2.2D AT": "TITANO 2.2D AT (Nova/Argentina/8AP)",
     "TITANO 2.2D MT": "TITANO 2.2D MT (Nova/Argentina/8AP)",
     "TITANO AUTOMÁTICO": "TITANO 2.2D AT (Antiga/Uruguaia/9VC)",
     "TITANO MANUAL": "TITANO 2.2D MT (Antiga/Uruguaia/9VC)",
     "SCUDO": "SCUDO 1.5 (Antiga)",
-    "SCUDO 2.2D": "SCUDO 2.2 (Nova)"
+    "SCUDO 2.2D": "SCUDO 2.2 (Nova)",
+    "FIORINO 1.4 (21/22)": "FIORINO 1.4 (2021/2022 para cima)"
 }
 
 
@@ -77,6 +78,8 @@ if header_row_idx:
         if not modelo_nome or str(modelo_nome).strip() == "" or "Preço" in str(modelo_nome) or "a cada" in str(modelo_nome):
             continue
         modelo_nome = str(modelo_nome).strip()
+        if modelo_nome == "FIORINO 1.4 (21/21)":
+            continue
         if modelo_nome in mapeamento_nomes:
             modelo_nome = mapeamento_nomes[modelo_nome]
         
@@ -126,11 +129,16 @@ for sheet_name in sheet_names[1:]:
             val1 = sheet.cell(row=r_subir, column=1).value
             if val1 is not None and str(val1).strip() != "":
                 nome_modelo = str(val1).strip()
-                if nome_modelo in mapeamento_nomes:
-                    nome_modelo = mapeamento_nomes[nome_modelo]
                 break
         if not nome_modelo:
             nome_modelo = sheet_name
+            
+        if nome_modelo == "FIORINO 1.4 (21/21)":
+            print(f"  -> Bloco {idx_block + 1}: '{nome_modelo}' [IGNORADO]")
+            continue
+            
+        if nome_modelo in mapeamento_nomes:
+            nome_modelo = mapeamento_nomes[nome_modelo]
             
         print(f"  -> Bloco {idx_block + 1}: '{nome_modelo}'")
         
