@@ -217,6 +217,10 @@ for sheet_name in sheet_names[1:]:
             if pn in mapeamento_pn:
                 pn = mapeamento_pn[pn]
                 
+            # Forçar o código 7092779 para óleo 0W30
+            if "0w30" in desc.lower():
+                pn = "7092779"
+                
             preco_unit = sheet.cell(row=r, column=4).value
             
             if preco_unit is not None:
