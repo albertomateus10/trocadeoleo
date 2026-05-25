@@ -316,6 +316,14 @@ for sheet_name in sheet_names[1:]:
                                 item["custos"][r_name] = round(6.0 * 91.54, 2)
                         except:
                             pass
+        elif "TITANO" in nome_modelo.upper() or nome_modelo in ["TORO 2.2TD MY26", "TORO 2.0"]:
+            for item in itens:
+                name_lower = item["nome"].lower()
+                is_oleo_target = item["tipo"] == "peça" and not any(x in name_lower for x in ["filtro", "filtrante"]) and (
+                    "5w30" in name_lower and any(y in name_lower for y in ["motor", "maxpro", "ineo"])
+                )
+                if is_oleo_target:
+                    item["pn"] = "7094487"
             
         # Recalcular custos totais de cada revisão baseados nos novos custos recalculados
         custos_revisoes_totais = []

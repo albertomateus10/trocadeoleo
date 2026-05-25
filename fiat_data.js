@@ -12529,7 +12529,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO DIESEL DPF C2 5W30",
-          "pn": "K68231015LA_F",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
@@ -12869,7 +12869,7 @@ window.fiatData = {
         },
         {
           "nome": "MOPAR MAXPRO DIESEL DPF C2 5W30",
-          "pn": "K68231015LA_F",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
@@ -15781,7 +15781,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR INEO HTC 5W30 (1L)",
-          "pn": "7092778",
+          "pn": "7094487",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
@@ -16118,7 +16118,7 @@ window.fiatData = {
         },
         {
           "nome": "OLEO MOTOR INEO HTC 5W30 (1L)",
-          "pn": "7092778",
+          "pn": "7094487",
           "preco_unitario": 98.4735649675258,
           "tipo": "peça",
           "trocas": {
@@ -16520,7 +16520,7 @@ window.fiatData = {
         },
         {
           "nome": "Mopar Maxpro Syntetic Diesel DPF C2 5W30",
-          "pn": "K68231015LA_F",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
@@ -16895,7 +16895,7 @@ window.fiatData = {
         },
         {
           "nome": "Mopar Maxpro Syntetic Diesel DPF C2 5W30",
-          "pn": "K68231015LA_F",
+          "pn": "7094487",
           "preco_unitario": 91.54,
           "tipo": "peça",
           "trocas": {
