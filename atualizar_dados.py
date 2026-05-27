@@ -239,9 +239,19 @@ for sheet_name in sheet_names[1:]:
                 qty_val = sheet.cell(row=r, column=qty_col).value
                 cost_val = sheet.cell(row=r, column=cost_col).value
                 
+                is_oil_adjusted = False
                 if qty_val is not None and str(qty_val).strip() != "" and str(qty_val).strip().lower() != 'nan':
                     try:
-                        trocas[rev_name] = float(qty_val) if '.' in str(qty_val) else int(qty_val)
+                        orig_val = float(str(qty_val).replace(',', '.'))
+                        qty_float = orig_val
+                        if abs(orig_val - 2.54) < 0.01:
+                            qty_float = 2.6
+                            is_oil_adjusted = True
+                        elif abs(orig_val - 3.36) < 0.01:
+                            qty_float = 3.4
+                            is_oil_adjusted = True
+                        
+                        trocas[rev_name] = qty_float
                     except:
                         trocas[rev_name] = str(qty_val).strip()
                         
@@ -250,6 +260,12 @@ for sheet_name in sheet_names[1:]:
                         custos_itens[rev_name] = float(cost_val)
                     except:
                         custos_itens[rev_name] = str(cost_val).strip()
+                        
+                if is_oil_adjusted and rev_name in trocas:
+                    try:
+                        custos_itens[rev_name] = round(float(trocas[rev_name]) * float(preco_unit), 2)
+                    except:
+                        pass
                         
             tipo = "peça"
             if "mão-de-obra" in desc.lower() or "mão de obra" in desc.lower() or "mo fiat" in pn.lower() or "tempo padrão" in desc.lower() or "total de mão de obra" in desc.lower():
